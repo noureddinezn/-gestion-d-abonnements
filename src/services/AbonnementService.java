@@ -13,4 +13,8 @@ import java.util.Optional;
 public class AbonnementService {
     private AbonnementDAO abonnementDAO;
     private PaiementDAO paiementDAO;
+    public AbonnementService(AbonnementDAO abonnementDAO, PaiementDAO paiementDAO) {
+        this.abonnementDAO = abonnementDAO;
+        this.paiementDAO = paiementDAO;
+    }
 }
