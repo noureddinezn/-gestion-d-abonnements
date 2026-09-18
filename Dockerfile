@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk AS build
+FROM eclipse-temurin:8-jdk AS build
 
 WORKDIR /app
 COPY src ./src
