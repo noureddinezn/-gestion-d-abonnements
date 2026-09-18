@@ -41,4 +41,19 @@ public class AbonnementService {
     public List<Abonnement> ListerAbonnements() {
         return abonnementDAO.findAll();
     }
+    private void genererEcheances(Abonnement abonnement) {
+        LocalDate dateEcheance = abonnement.getDateDebut();
+
+        while (!dateEcheance.isAfter(abonnement.getDateFin())) {
+            Paiement paiement = new Paiement(
+                    abonnement.getId(),
+                    dateEcheance,
+                    null,
+                    "MENSUEL",
+                    StatutPaiement.NON_PAYE
+            );
+            paiementDAO.create(paiement);
+            dateEcheance = dateEcheance.plusMonths(1);
+        }
+    }
 }
