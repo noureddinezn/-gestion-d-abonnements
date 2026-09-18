@@ -50,4 +50,17 @@ import java.util.List;
                 .mapToDouble(p -> abonnement.getMontantMensuel())
                 .sum();
     }
+    public List<Paiement> getCinqDerniersPaiements() {
+        return paiementDAO.findLastPayments(5);
+    }
+
+    public double genererRapportMensuel(int annee, int mois) {
+        return paiementDAO.findAll().stream()
+                .filter(p -> p.getStatut() == StatutPaiement.PAYE)
+                .filter(p -> p.getDatePaiement() != null && p.getDatePaiement().getYear() == annee && p.getDatePaiement().getMonthValue() == mois)
+                .mapToDouble(p -> abonnementDAO.findById(p.getIdAbonnement())
+                        .map(Abonnement::getMontantMensuel)
+                        .orElse(0.0))
+                .sum();
+    }
 }
