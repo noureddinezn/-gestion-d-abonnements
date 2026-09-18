@@ -1,6 +1,7 @@
 package main;
 import dao.AbonnementDAO;
 import dao.PaiementDAO;
+import model
 
 public class Main {
     public static void main(String[] args) {
