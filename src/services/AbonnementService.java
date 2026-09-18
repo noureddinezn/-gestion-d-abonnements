@@ -17,4 +17,8 @@ public class AbonnementService {
         this.abonnementDAO = abonnementDAO;
         this.paiementDAO = paiementDAO;
     }
+    public void creerAbonnement(Abonnement abonnement) {
+        abonnementDAO.create(abonnement);
+        genererEcheances(abonnement);
+    }
 }
