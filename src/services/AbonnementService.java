@@ -34,4 +34,11 @@ public class AbonnementService {
             abonnementDAO.update(abo);
         });
     }
+    public Optional<Abonnement> findById(String id) {
+        return abonnementDAO.findById(id);
+    }
+
+    public List<Abonnement> ListerAbonnements() {
+        return abonnementDAO.findAll();
+    }
 }
