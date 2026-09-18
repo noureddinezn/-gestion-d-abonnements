@@ -10,4 +10,11 @@ import java.util.List;
 
 
     private PaiementDAO paiementDAO;
+    private PaiementDAO paiementDAO;
+    private AbonnementDAO abonnementDAO;
+
+    public PaiementService(PaiementDAO paiementDAO, AbonnementDAO abonnementDAO) {
+        this.paiementDAO = paiementDAO;
+        this.abonnementDAO = abonnementDAO;
+    }
 }
