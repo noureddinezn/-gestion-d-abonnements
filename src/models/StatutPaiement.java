@@ -1,5 +1,8 @@
 package models;
 
-public class StatutPaiement {
+public enum StatutPaiement {
+    PAYE, 
+    MON_PAYE,
+    EN_RETARD
     
 }

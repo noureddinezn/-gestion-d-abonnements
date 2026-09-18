@@ -1,5 +1,10 @@
 package models;
 
-public class StatutAbonnement {
-    
+public enum StatutAbonnement {
+    ACTIVE, 
+    SUSPENDU,
+    RESILIE
+   
 }
+    
+
