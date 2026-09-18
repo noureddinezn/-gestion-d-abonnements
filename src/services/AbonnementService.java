@@ -28,4 +28,10 @@ public class AbonnementService {
     public void suprimerAbonnement(String id) {
         abonnementDAO.delete(id);
     }
+    public void resilierAbonnement(String id) {
+        abonnementDAO.findById(id).ifPresent(abo -> {
+            abo.setStatut(StatutAbonnement.RESILIE);
+            abonnementDAO.update(abo);
+        });
+    }
 }
