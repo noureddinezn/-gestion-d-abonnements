@@ -24,4 +24,11 @@ import java.util.List;
             paiementDAO.update(p);
         });
     }
+    public void modifierPaiement(Paiement paiement) {
+        paiementDAO.update(paiement);
+    }
+
+    public void supprimerPaiement(String id) {
+        paiementDAO.delete(id);
+    }
 }
