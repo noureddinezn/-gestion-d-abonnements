@@ -11,4 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class AbonnementService {
+    private AbonnementDAO abonnementDAO;
+    private PaiementDAO paiementDAO;
 }
