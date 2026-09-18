@@ -21,4 +21,11 @@ public class AbonnementService {
         abonnementDAO.create(abonnement);
         genererEcheances(abonnement);
     }
+    public void modifierAbonnement(Abonnement abonnement) {
+        abonnementDAO.update(abonnement);
+    }
+
+    public void suprimerAbonnement(String id) {
+        abonnementDAO.delete(id);
+    }
 }
