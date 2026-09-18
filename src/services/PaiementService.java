@@ -63,4 +63,13 @@ import java.util.List;
                         .orElse(0.0))
                 .sum();
     }
+    public double genererRapportAnnuel(int annee) {
+        return paiementDAO.findAll().stream()
+                .filter(p -> p.getStatut() == StatutPaiement.PAYE)
+                .filter(p -> p.getDatePaiement() != null && p.getDatePaiement().getYear() == annee)
+                .mapToDouble(p -> abonnementDAO.findById(p.getIdAbonnement())
+                        .map(Abonnement::getMontantMensuel)
+                        .orElse(0.0))
+                .sum();
+    }
 }
