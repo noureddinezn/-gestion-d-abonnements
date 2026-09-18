@@ -31,4 +31,13 @@ import java.util.List;
     public void supprimerPaiement(String id) {
         paiementDAO.delete(id);
     }
+    public void detecterImpayes() {
+        paiementDAO.findAll().stream()
+                .filter(p -> p.getStatut() == StatutPaiement.NON_PAYE)
+                .filter(p -> p.getDateEcheance().isBefore(LocalDate.now()))
+                .forEach(p -> {
+                    p.setStatut(StatutPaiement.EN_RETARD);
+                    paiementDAO.update(p);
+                });
+    }
 }
