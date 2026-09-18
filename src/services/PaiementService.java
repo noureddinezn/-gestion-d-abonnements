@@ -17,4 +17,11 @@ import java.util.List;
         this.paiementDAO = paiementDAO;
         this.abonnementDAO = abonnementDAO;
     }
+    public void enregistrerPaiement(String idPaiement) {
+        paiementDAO.findById(idPaiement).ifPresent(p -> {
+            p.setStatut(StatutPaiement.PAYE);
+            p.setDatePaiement(LocalDate.now());
+            paiementDAO.update(p);
+        });
+    }
 }
