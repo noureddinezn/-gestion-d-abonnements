@@ -40,4 +40,14 @@ import java.util.List;
                     paiementDAO.update(p);
                 });
     }
+    public double calculeSommePayee(String idAbonnement) {
+        Abonnement abonnement = abonnementDAO.findById(idAbonnement).orElse(null);
+        if (abonnement == null) {
+            return 0.0;
+        }
+        return paiementDAO.findByAbonnement(idAbonnement).stream()
+                .filter(p -> p.getStatut() == StatutPaiement.PAYE)
+                .mapToDouble(p -> abonnement.getMontantMensuel())
+                .sum();
+    }
 }
