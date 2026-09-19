@@ -10,17 +10,17 @@ import java.util.stream.Collectors;
 
 public class AbonnementDAO {
 
-    private List<PaiementDAO> abonnements = new ArrayList<>();
+    private List<Abonnement> abonnements = new ArrayList<>();
 
-    public void create(PaiementDAO abonnement) {
+    public void create(Abonnement abonnement) {
         abonnements.add(abonnement);
     }
 
-    public List<PaiementDAO> findAll() {
+    public List<Abonnement> findAll() {
         return abonnements;
     }
 
-    public Optional<PaiementDAO> findById(String id) {
+    public Optional<Abonnement> findById(String id) {
         return abonnements.stream()
                 .filter(abo -> abo.getId().equals(id))
                 .findFirst();
@@ -30,13 +30,13 @@ public class AbonnementDAO {
         return abonnements.removeIf(abo -> abo.getId().equals(id));
     }
 
-    public void update(PaiementDAO abonnementModifie) {
+    public void update(Abonnement abonnementModifie) {
         abonnements.replaceAll(abo -> 
             abo.getId().equals(abonnementModifie.getId()) ? abonnementModifie : abo
         );
     }
 
-    public List<PaiementDAO> findActiveSubscriptions() {
+    public List<Abonnement> findActiveSubscriptions() {
         return abonnements.stream()
                 .filter(abo -> abo.getStatut() == StatutAbonnement.ACTIVE)
                 .collect(Collectors.toList());
