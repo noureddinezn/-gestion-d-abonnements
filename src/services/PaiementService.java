@@ -8,8 +8,8 @@ import model.StatutPaiement;
 import java.time.LocalDate;
 import java.util.List;
 
+public class PaiementService {
 
-    private PaiementDAO paiementDAO;
     private PaiementDAO paiementDAO;
     private AbonnementDAO abonnementDAO;
 
@@ -17,6 +17,7 @@ import java.util.List;
         this.paiementDAO = paiementDAO;
         this.abonnementDAO = abonnementDAO;
     }
+
     public void enregistrerPaiement(String idPaiement) {
         paiementDAO.findById(idPaiement).ifPresent(p -> {
             p.setStatut(StatutPaiement.PAYE);
@@ -24,6 +25,7 @@ import java.util.List;
             paiementDAO.update(p);
         });
     }
+
     public void modifierPaiement(Paiement paiement) {
         paiementDAO.update(paiement);
     }
@@ -31,15 +33,14 @@ import java.util.List;
     public void supprimerPaiement(String id) {
         paiementDAO.delete(id);
     }
+
     public void detecterImpayes() {
         paiementDAO.findAll().stream()
                 .filter(p -> p.getStatut() == StatutPaiement.NON_PAYE)
                 .filter(p -> p.getDateEcheance().isBefore(LocalDate.now()))
-                .forEach(p -> {
-                    p.setStatut(StatutPaiement.EN_RETARD);
-                    paiementDAO.update(p);
-                });
+                .forEach(p -> p.setStatut(StatutPaiement.EN_RETARD));
     }
+
     public double calculeSommePayee(String idAbonnement) {
         Abonnement abonnement = abonnementDAO.findById(idAbonnement).orElse(null);
         if (abonnement == null) {
@@ -50,6 +51,7 @@ import java.util.List;
                 .mapToDouble(p -> abonnement.getMontantMensuel())
                 .sum();
     }
+
     public List<Paiement> getCinqDerniersPaiements() {
         return paiementDAO.findLastPayments(5);
     }
@@ -63,6 +65,7 @@ import java.util.List;
                         .orElse(0.0))
                 .sum();
     }
+
     public double genererRapportAnnuel(int annee) {
         return paiementDAO.findAll().stream()
                 .filter(p -> p.getStatut() == StatutPaiement.PAYE)
